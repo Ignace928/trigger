@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run: npm ci
       - run:
-          name: Tests unitaires
+          name: Lancer les tests unitaires
           command: npm run test
 
   build:
@@ -24,10 +24,23 @@ jobs:
       - run:
           name: Build du projet
           command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+
+  deploy:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Déployer via Render Deploy Hook
+          command: curl -X POST "$RENDER_DEPLOY_HOOK_URL"
 
 workflows:
   version: 2
-  test-and-build:
+  deploy-on-push:
     jobs:
       - test
       - build:
