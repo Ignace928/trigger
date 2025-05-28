@@ -1,6 +1,4 @@
 # Vue 3 + TypeScript + Vite
 
-npm run dev
-npm run build
+Mon premier projet Vue et TypeScript avec un CI/CD
 
-http://localhost:5173/
