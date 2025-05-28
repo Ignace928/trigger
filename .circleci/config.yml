@@ -24,28 +24,12 @@ jobs:
       - run:
           name: Build du projet
           command: npm run build
-      - persist_to_workspace:
-          root: .
-          paths:
-            - dist
-
-  deploy:
-    executor: node-executor
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Déploiement vers Render
-          command: curl -X POST "$RENDER_DEPLOY_HOOK_URL"
 
 workflows:
   version: 2
-  deploy-on-push:
+  test-and-build:
     jobs:
       - test
       - build:
           requires:
             - test
-      - deploy:
-          requires:
-            - build
