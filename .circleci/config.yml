@@ -1,0 +1,51 @@
+version: 2.1
+
+executors:
+  node-executor:
+    docker:
+      - image: cimg/node:18.20
+    working_directory: ~/project
+
+jobs:
+  test:
+    executor: node-executor
+    steps:
+      - checkout
+      - run: npm ci
+      - run:
+          name: Tests unitaires
+          command: npm run test
+
+  build:
+    executor: node-executor
+    steps:
+      - checkout
+      - run: npm ci
+      - run:
+          name: Build du projet
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+
+  deploy:
+    executor: node-executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Déploiement vers Render
+          command: curl -X POST "$RENDER_DEPLOY_HOOK_URL"
+
+workflows:
+  version: 2
+  deploy-on-push:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
