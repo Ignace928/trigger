@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import LoginForm from './LoginForm.vue';
 
 const count = ref(0)
 </script>
 
 <template>
-
-  <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <button type="button" @click="count++">count is {{ count }}</button>
-    <button type="button" @click="count++">count is {{ count }}</button>
+  <div>
+    <LoginForm></LoginForm>
+    <div class="card">
+      <button type="button" @click="count++">count is {{ count }}</button>
+    </div>
   </div>
 
 </template>
