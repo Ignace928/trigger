@@ -1,0 +1,63 @@
+<template>
+  <form @submit.prevent="submitForm">
+    <div>
+      <input v-model="form.name" type="text" placeholder="Nom" />
+      <span v-if="v$.name.$error">
+        <span v-if="!v$.name.required">Nom requis</span>
+        <span v-if="!v$.name.minLength">Min 3 caractères</span>
+      </span>
+    </div>
+
+    <div>
+      <input v-model="form.email" type="email" placeholder="Email" />
+      <span v-if="v$.email.$error">
+        <span v-if="!v$.email.required">Email requis</span>
+        <span v-if="!v$.email.email">Email invalide</span>
+      </span>
+    </div>
+
+    <button type="submit">Envoyer</button>
+  </form>
+</template>
+
+
+
+
+
+
+
+/*
+<script setup lang="ts">
+import { reactive } from 'vue'
+import useVuelidate from '@vuelidate/core'
+import { required, email, minLength } from '@vuelidate/validators'
+
+// 1. Formulaire réactif
+const form = reactive({
+  name: '',
+  email: '',
+})
+
+// 2. Règles de validation
+const rules = {
+  name: { required, minLength: minLength(3) },
+  email: { required, email }
+}
+
+// 3. Activation de Vuelidate
+const v$ = useVuelidate(rules, form)
+
+// 4. Soumission du formulaire
+const submitForm = async () => {
+  v$.value.$touch() // Marque tous les champs comme "touchés"
+  if (!v$.value.$invalid) {
+    console.log("Formulaire valide :", form)
+    // Ici, tu peux envoyer `form` à une API avec fetch() ou axios
+  } else {
+    console.warn("Formulaire invalide")
+  }
+}
+</script>
+
+
+

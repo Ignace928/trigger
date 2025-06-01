@@ -59,7 +59,7 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -76,4 +76,27 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.champ {
+  margin: 1% 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  border-radius: 25px;
+  padding: 0.6em;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: #171717;
+  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+}
+
+.input-champ {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  color: #d3d3d3;
 }

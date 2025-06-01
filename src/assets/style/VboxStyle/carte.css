@@ -1,0 +1,17 @@
+.card {
+    margin: 0px 30px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #171717;
+    border-radius: 25px;
+    transition: .4s ease-in-out;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  }
+table,th,tr,td {
+    border: blanchedalmond solid 1px;
+}
