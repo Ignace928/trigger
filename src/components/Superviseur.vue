@@ -1,7 +1,7 @@
 <script setup>
     import {ref} from "vue"
     import StalkVue from "./Stalk.vue"
-
+    import GeoMap from "./GeoMap.vue"
 
     const confirm = ref(false)
     const superUser = ref({
@@ -33,7 +33,7 @@
         <div id="superviseur" v-if="confirm">
             <p>Localisation en cours avec leaflet</p>
             <button @click="tooglers">Leave</button>
-            <StalkVue/>
+            <GeoMap/>
         </div>
 
         <div v-else>
