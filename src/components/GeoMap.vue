@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
@@ -12,20 +12,12 @@ const domaine = "localhost:8020"
 
 let maps: L.Map
 const marque = new Map<string, L.Marker>()
-let socket: WebSocket | null = null
 
 function startTracking() {
     if (!userName.value) {
-        console.log("Nom utilisateur manquant")
+        alert("Nom utilisateur manquant")
         return
     }
-
-    socket = new WebSocket(`ws://${domaine}`)
-    console.log("Nom utilisateur :", userName.value)
-
-    socket.onopen = () => {
-        console.log('Connecté WebSocket')
-
         if (navigator.geolocation) {
             navigator.geolocation.watchPosition(
                 (position) => {
@@ -34,8 +26,9 @@ function startTracking() {
                         lat: position.coords.latitude,
                         long: position.coords.longitude
                     }
-                    socket?.send(JSON.stringify(data))
-                    console.log('Position envoyée')
+                    L.marker([data.lat, data.long]).addTo(maps)
+                        .bindPopup(data.Nom)
+                        .openPopup();
                 },
                 (err) => {
                     alert(`Erreur de Localisation: ${err}`)
@@ -49,35 +42,15 @@ function startTracking() {
         } else {
             alert("Navigateur incompatible avec la géolocalisation")
         }
-    }
-
-    socket.onmessage = (e) => {
-        if (!maps){return;}
-        console.log("Reçu de websoket:", e.data)
-        const users = JSON.parse(e.data)
-
-        users.forEach((user: { Nom: string, lat: number, long: number }) => {
-            if (!marque.has(user.Nom)) {
-                const marker = L.marker([user.lat, user.long])
-                    .addTo(maps)
-                    .bindPopup(user.Nom)
-                marque.set(user.Nom, marker)
-            } else {
-                marque.get(user.Nom)?.setLatLng([user.lat, user.long])
-            }
-        })
-    }
+    
+       
 }
 
 onMounted(() => {
-    console.log("73: Monté")
     maps = L.map('map').setView([0, 0], 2)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
     }).addTo(maps)
-})
-onUnmounted(() => {
-    console.log("Bey geo map")
 })
 </script>
 
