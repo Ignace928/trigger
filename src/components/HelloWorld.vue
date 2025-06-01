@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import LoginForm from './LoginForm.vue'
-import Superviseur from './Superviseur.vue'
+  import Superviseur from './Superviseur.vue'
 
 
 </script>

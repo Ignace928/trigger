@@ -1,6 +1,5 @@
 <script setup>
     import {ref} from "vue"
-    import StalkVue from "./Stalk.vue"
     import GeoMap from "./GeoMap.vue"
 
     const confirm = ref(false)
