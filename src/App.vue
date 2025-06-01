@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
-import NavigationBar from './components/NavigationBar.vue'
 
 </script>
     
   <template>
     <div class="parent">
-      <NavigationBar/>
       <HelloWorld/>
 
     </div>

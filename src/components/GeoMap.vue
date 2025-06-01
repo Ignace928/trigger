@@ -4,14 +4,12 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 const userName = ref("")
-const domaine = "localhost:8020"
 // const madagascar = ref({
 //     lat:-18.907136,
 //     long:47.5168768
 // })
 
 let maps: L.Map
-const marque = new Map<string, L.Marker>()
 
 function startTracking() {
     if (!userName.value) {

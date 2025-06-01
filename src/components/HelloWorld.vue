@@ -4,7 +4,6 @@ import LoginForm from './LoginForm.vue'
 import Superviseur from './Superviseur.vue'
 
 
-const count = ref(0)
 </script>
 
 <template>
