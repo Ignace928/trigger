@@ -1,5 +1,5 @@
 # Vue 3 + TypeScript + Vite
-Mon projet TypeScript pour le CI/CD
+Mon projet TypeScript pour le CI/CD avec Circleci
 
 (npm install -D vitest @vitejs/plugin-vue @testing-library/vue )
 
